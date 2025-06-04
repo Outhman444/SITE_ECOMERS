@@ -1,0 +1,681 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    
+    background-color: #f4f4f4;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    background-image: url("../image/background-1688260_1920.jpg") ;
+    z-index: -1;
+    opacity: 0.9;
+    
+   
+    
+  
+    
+    
+}
+
+
+.auction-card {
+    width: 100%;
+    max-width: 400px;
+    background-color: #f4f4f4;
+    border-radius: 12px;
+    box-shadow:  10px,10px 20px 30px rgb(0, 0, 0);
+    overflow: hidden;
+    margin: auto;
+    transition: transform 0.3s ease;
+}
+
+.auction-card:hover {
+    transform: translateY(-1px);
+}
+
+.category {
+    background-color: #3498db;
+    color: white;
+    padding: 8px 15px;
+    font-size: 14px;
+    font-weight: bold;
+    display: inline-block;
+    border-radius: 0 0 10px 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 10;
+}
+
+.image-slider {
+    position: relative;
+    height: 250px;
+    overflow: hidden;
+    object-fit: cover
+}
+
+.slider-wrapper {
+    display: flex;
+    transition: transform 0.5s ease;
+    height: 100%;
+}
+
+.slider-wrapper img {
+    flex: 0 0 100%;
+    width: 100%;
+    height: 100%;
+    object-fit: contain
+}
+
+.slider-nav {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+}
+
+.slider-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: rgb(249, 247, 247);
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.slider-dot.active {
+    background-color: rgba(95, 96, 95, 0.687);
+}
+
+.slider-arrows {
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: space-between;
+    padding: 0 10px;
+}
+
+.arrow {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.arrow:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.product-info {
+    padding: 20px;
+}
+
+.product-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #2c3e50;
+}
+
+.product-description {
+    font-size: 14px;
+    color: #7f8c8d;
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+.price-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.current-price {
+    font-size: 24px;
+    font-weight: bold;
+    color: #e74c3c;
+}
+
+.bid-count {
+    background-color: #f1c40f;
+    color: #34495e;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.countdown-section {
+    background-color: #ecf0f1;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.countdown-title {
+    font-size: 14px;
+    color: #7f8c8d;
+    margin-bottom: 5px;
+}
+
+.countdown {
+    display: flex;
+    justify-content: space-around;
+}
+
+.countdown-item {
+    text-align: center;
+}
+
+.countdown-value {
+    font-size: 20px;
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+.countdown-label {
+    font-size: 12px;
+    color: #7f8c8d;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.bid-button {
+    flex: 1;
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.bid-button:hover {
+    background-color: #c0392b;
+}
+
+.share-button {
+    width: 60px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.share-button:hover {
+    background-color: #2980b9;
+}
+
+.share-popup {
+    display: none;
+    position: absolute;
+    background-color: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+}
+
+.bid-input {
+    padding: 10px 16px;
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    width: 120px;
+    max-width: 400px;
+    box-sizing: border-box;
+    padding-left: 40px;
+}
+
+.bid-input:focus {
+    border-color: #4CAF50;
+    outline: none;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+}
+
+.bid-input::placeholder {
+    color: #888;
+    font-style: italic;
+}
+
+.bid-input[type="number"] {
+    background-image: url('../image/logo.jpg');
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    background-size: 18px;
+    padding-left: 35px;
+}
+
+.bid-input[type="number"]::-webkit-outer-spin-button,
+.bid-input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.bid-input[type="number"]:focus {
+    background-color: #eafaf1;
+}
+
+/* Enhanced Responsive Breakpoints */
+/* Extra Small Devices (Phones) */
+@media (max-width: 480px) {
+    .auction-card {
+        max-width: 100%;
+    }
+    
+    .image-slider {
+        height: 180px;
+    }
+    
+    .product-title {
+        font-size: 18px;
+    }
+    
+    .current-price {
+        font-size: 20px;
+    }
+    
+    .countdown-value {
+        font-size: 16px;
+    }
+    
+    .bid-button, .share-button {
+        padding: 10px;
+    }
+    
+    .arrow {
+        width: 30px;
+        height: 30px;
+    }
+    
+    .category {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+}
+
+/* Small Devices (Large Phones, Small Tablets) */
+@media (min-width: 481px) and (max-width: 767px) {
+    .auction-card {
+        max-width: 450px;
+    }
+    
+    .image-slider {
+        height: 220px;
+    }
+}
+
+/* Medium Devices (Tablets) */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .auction-card {
+        max-width: 500px;
+    }
+    
+    .image-slider {
+        height: 280px;
+    }
+    
+    .product-title {
+        font-size: 22px;
+    }
+    
+    .current-price {
+        font-size: 26px;
+    }
+}
+
+/* Large Devices (Desktops) */
+@media (min-width: 1024px) {
+    .auction-card {
+        max-width: 400px;
+    }
+    
+    .image-slider {
+        height: 250px;
+    }
+}
+
+/* For High-DPI Screens */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .bid-input[type="number"] {
+        background-size: 20px;
+    }
+}
+
+/* For very small screens */
+@media (max-width: 320px) {
+    .product-info {
+        padding: 15px;
+    }
+    
+    .countdown {
+        flex-wrap: wrap;
+    }
+    
+    .countdown-item {
+        flex: 1 0 50%;
+        margin-bottom: 5px;
+    }
+    
+    .action-buttons {
+        flex-direction: column;
+    }
+    
+    .share-button {
+        width: 100%;
+    }
+}
+
+/* For RTL languages support */
+.rtl {
+    direction: rtl;
+    text-align: right;
+}
+
+.rtl .category {
+    right: auto;
+    left: 0;
+    border-radius: 0 0 0 10px;
+}
+
+.rtl .bid-input {
+    padding-left: 16px;
+    padding-right: 40px;
+}
+
+.rtl .bid-input[type="number"] {
+    background-position: calc(100% - 10px) center;
+}
+.name-money {
+    font-weight: bold; 
+    color: #28a745; 
+    font-size: 18px;
+    background: rgba(40, 167, 69, 0.1); 
+    padding: 5px 10px; 
+    border-radius: 5px;
+}
+
+.auction-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; 
+    justify-content: center; 
+}
+
+
+
+
+
+@media (max-width: 768px) {
+    .auction-card {
+        flex: 1 1 100%;
+        max-width: 100%;
+    }
+}
+.containername_title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; 
+    padding: 10px 20px;
+    background-color: #f8f9fa; /* لون خلفية خفيف */
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.product-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-right:30px;
+    display: flex;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* مسافة بين الصورة والاسم */
+}
+
+.user-profile-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%; 
+    background-color: #ccc; 
+}
+.name_user {
+    font-size: 20px;
+    font-weight: bold;
+    color: darkblue;
+    transition: all 0.3s ease;
+}
+
+.name_user:hover {
+    color: #00008B; 
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+
+
+/* Base styling for messages */
+.success, .error {
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    font-weight: 500;
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: fadeInDown 0.5s forwards;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .success {
+    background-color: #dff2bf;
+    color: #4F8A10;
+    border-left: 5px solid #4F8A10;
+  }
+  
+  .error {
+    background-color: #ffecec;
+    color: #D8000C;
+    border-left: 5px solid #D8000C;
+  }
+  
+  /* Basic fade in and slide down animation */
+  @keyframes fadeInDown {
+    0% {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Pulse animation for success messages */
+  .success {
+    animation: fadeInDown 0.5s forwards, pulse 1.5s infinite alternate;
+  }
+  
+  @keyframes pulse {
+    0% {
+      box-shadow: 0 0 0 0 rgba(79, 138, 16, 0.4);
+    }
+    100% {
+      box-shadow: 0 0 0 10px rgba(79, 138, 16, 0);
+    }
+  }
+  
+  /* Shake animation for error messages */
+  .error {
+    animation: fadeInDown 0.5s forwards, shake 0.5s 0.5s;
+  }
+  
+  @keyframes shake {
+    0%, 100% {transform: translateX(0);}
+    10%, 30%, 50%, 70%, 90% {transform: translateX(-5px);}
+    20%, 40%, 60%, 80% {transform: translateX(5px);}
+  }
+  
+  /* Progress bar animation for messages that auto-dismiss */
+  .success::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    width: 100%;
+    background-color: #4F8A10;
+    animation: progressBar 1s linear forwards; /* Match this with your refresh time */
+  }
+  
+  @keyframes progressBar {
+    0% {width: 100%;}
+    100% {width: 0%;}
+  }
+  
+  /* Bounce effect */
+  .bounce-in {
+    animation: bounceIn 0.8s forwards;
+  }
+  
+  @keyframes bounceIn {
+    0% {
+      opacity: 0;
+      transform: scale(0.3);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.05);
+    }
+    70% {
+      transform: scale(0.9);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  
+  /* Fade out animation */
+  .fade-out {
+    animation: fadeOut 1s forwards;
+  }
+  
+  @keyframes fadeOut {
+    0% {opacity: 1;}
+    100% {opacity: 0; visibility: hidden;}
+  }
+  
+  /* Slide in from side */
+  .slide-in {
+    animation: slideIn 0.5s forwards;
+  }
+  
+  @keyframes slideIn {
+    0% {
+      opacity: 0;
+      transform: translateX(-100%);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  /* Attention grabber animation */
+  .attention {
+    animation: attention 2s infinite;
+  }
+  
+  @keyframes attention {
+    0%, 100% {
+      transform: scale(1);
+      box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.1);
+    }
+    50% {
+      transform: scale(1.03);
+      box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.1);
+    }
+  }
+  
+  /* Typing effect for long messages */
+  .typing-effect {
+    overflow: hidden;
+    white-space: nowrap;
+    width: 0;
+    animation: typing 3.5s steps(60, end) forwards;
+  }
+  
+  @keyframes typing {
+    from {width: 0;}
+    to {width: 100%;}
+  }
+
+  /* Link style */
+a {
+    color: #4e73df; /* اللون الأزرق العصري */
+    text-decoration: none;
+    font-family: 'Arial', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    position: relative;
+    transition: color 0.3s ease, transform 0.3s ease;
+  }
+  
+  a::after {
+    content: '';
+    position: absolute;
+    width: 0%;
+    height: 3px;
+    background-color: #4e73df;
+    bottom: -2px;
+    left: 50%;
+    transition: width 0.3s ease, left 0.3s ease;
+  }
+  
+  a:hover {
+    color: #f39c12; /* تغيير اللون عند التمرير */
+    transform: translateY(-3px); /* رفع النص قليلاً */
+  }
+  
+  a:hover::after {
+    width: 100%;
+    left: 0;
+  }
+  
+  
